@@ -6,3 +6,4 @@ This project aims to provide convenient Physics embedding tools for researchers 
 Long Z, Lu Y, Ma X, Dong B. 
 Pde-net: Learning pdes from data. 
 InInternational conference on machine learning 2018 Jul 3 (pp. 3208-3216). PMLR.
+(http://proceedings.mlr.press/v80/long18a.html?ref=https://githubhelp.com)
