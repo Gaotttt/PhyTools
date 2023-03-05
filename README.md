@@ -3,7 +3,7 @@ This project aims to provide convenient Physics embedding tools for researchers 
 
 
 # Reference
-If you use the code in '<font color="#006600">/PDENet</font><br />', please cite:
+If you use the code in '/PhyTools/model-embedding/PDENet', please cite:
 
 **Pde-net: Learning pdes from data** 
 
