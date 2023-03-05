@@ -26,8 +26,7 @@ torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 
 # Loading data
-# data = np.load('D://forecast//DeePyMoD_torch-master//tests//data//keller_segel.npy', allow_pickle=True).item()
-data = np.load('/home/beihang/gyj/DeePyMoD_torch-master/tests/data/keller_segel.npy', allow_pickle=True).item()
+data = np.load('../tests/data/keller_segel.npy', allow_pickle=True).item()
 X = np.transpose((data['t'].flatten(), data['x'].flatten()))
 # (10201, 2)
 y = np.transpose((data['u'].flatten(), data['v'].flatten()))
