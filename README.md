@@ -17,6 +17,7 @@ If you use the code in '/PhyTools/model-embedding/PDENet', please cite:
 - Journal of Computational Physics 2019
 - [ [PDF](https://arxiv.org/pdf/1812.04426.pdf) | [bibtex](https://scholar.googleusercontent.com/scholar.bib?q=info:Z01UFVfNxnUJ:scholar.google.com/&output=citation&scisdr=CgWA1IZBEJ_Y5qRzoRM:AAGBfm0AAAAAZAR1uRNpvQgoK1TzB53T2QhTnrOHJjxs&scisig=AAGBfm0AAAAAZAR1uc1111l3T4rErHTpFAtvRa1hNSXn&scisf=4&ct=citation&cd=-1&hl=zh-CN) ]
 
+
 If you use the code in '/PhyTools/model-embedding/DeepONet', please cite:
 
 **Deeponet: Learning nonlinear operators for identifying differential equations based on the universal approximation theorem of operators** 
@@ -24,3 +25,12 @@ If you use the code in '/PhyTools/model-embedding/DeepONet', please cite:
 - Lu L, Jin P, Karniadakis G E
 - arXiv 2019
 - [ [PDF](https://arxiv.org/pdf/1910.03193.pdf) | [bibtex](https://scholar.googleusercontent.com/scholar.bib?q=info:rneZpAUIz80J:scholar.google.com/&output=citation&scisdr=CgWA1LfyEJ_Y5qR7kUs:AAGBfm0AAAAAZAR9iUuvA4TGQV-PyOx0-xiKd8-XPlrP&scisig=AAGBfm0AAAAAZAR9iW3kSlycVUjC6gzyJCWa4w_LRMTp&scisf=4&ct=citation&cd=-1&hl=zh-CN) ]
+
+
+If you use the code in '/PhyTools/model-embedding/FNO', please cite:
+
+**Fourier neural operator for parametric partial differential equations** 
+
+- Li Z, Kovachki N, Azizzadenesheli K, et al
+- ICLR 2020
+- [ [PDF](https://arxiv.org/pdf/2010.08895.pdf?trk=public_post_comment-text) | [bibtex](https://scholar.googleusercontent.com/scholar.bib?q=info:fI2-mHuyzawJ:scholar.google.com/&output=citation&scisdr=CgWA1LfyEJ_Y5qR4HUw:AAGBfm0AAAAAZAR-BUxuYRPwgQgAV4653HiSU5OTguri&scisig=AAGBfm0AAAAAZAR-BdlR-chaKC2ZUiPHI8BmDpvsUtfy&scisf=4&ct=citation&cd=-1&hl=zh-CN) ]
