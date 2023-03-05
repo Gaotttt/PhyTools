@@ -27,8 +27,7 @@ torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 
 # Loading data
-# data = np.load('/home/beihang/gyj/DeePyMoD_torch-master/tests/data/burgers.npy', allow_pickle=True).item()
-data = np.load('D://forecast//DeePyMoD_torch-master//tests//data//burgers.npy', allow_pickle=True).item()
+data = np.load('../tests/data/burgers.npy', allow_pickle=True).item()
 X = np.transpose((data['t'].flatten(), data['x'].flatten()))
 # print("X_size")
 # print(X.shape)
