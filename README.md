@@ -7,6 +7,12 @@ If you use the code in '/PhyTools/model-embedding/PDENet', please cite:
 
 **Pde-net: Learning pdes from data** 
 
-- <font color="#0000dd">LONG Z, LU Y, MA X, DONG B</font><br /> 
+- LONG Z, LU Y, MA X, DONG B
 - International conference on machine learning 2018
 - [ [PDF](http://proceedings.mlr.press/v80/long18a/long18a.pdf) | [bibtex](https://scholar.googleusercontent.com/scholar.bib?q=info:KW7G5ZqtD6gJ:scholar.google.com/&output=citation&scisdr=CgWA1LDyEJ_Y5qRtd8o:AAGBfm0AAAAAZARrb8q8Bp-YTbVLUxg6k1WnA04yh8tj&scisig=AAGBfm0AAAAAZARrb_9Zm9dEtLa90PZz11V7zasbeq0a&scisf=4&ct=citation&cd=-1&hl=zh-CN) ]
+
+**PDE-Net 2.0: Learning PDEs from data with a numeric-symbolic hybrid deep network** 
+
+- Long Z, Lu Y, Dong B
+- Journal of Computational Physics 2019
+- [ [PDF](https://arxiv.org/pdf/1812.04426.pdf) | [bibtex](https://scholar.googleusercontent.com/scholar.bib?q=info:Z01UFVfNxnUJ:scholar.google.com/&output=citation&scisdr=CgWA1IZBEJ_Y5qRzoRM:AAGBfm0AAAAAZAR1uRNpvQgoK1TzB53T2QhTnrOHJjxs&scisig=AAGBfm0AAAAAZAR1uc1111l3T4rErHTpFAtvRa1hNSXn&scisf=4&ct=citation&cd=-1&hl=zh-CN) ]
