@@ -3,7 +3,7 @@ This project aims to provide convenient Physics embedding tools for researchers 
 
 
 # Reference
-If you use the code from xxx folder, please cite:
+If you are using the code in a folder named PDENet, please cite:
 
 **Pde-net: Learning pdes from data** 
 
