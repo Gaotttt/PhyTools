@@ -5,7 +5,7 @@ This project aims to provide convenient Physics embedding tools for researchers 
 # Reference
 If you use the code from xxx folder, please cite:
 
-**Pde-net: Learning pdes from data**
+**Pde-net: Learning pdes from data** 
 
 <font color="#0000dd">LONG Z, LU Y, MA X, DONG B</font><br /> 
 
