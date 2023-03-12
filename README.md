@@ -19,6 +19,8 @@ This project aims to provide convenient Physics embedding tools for researchers 
 - International conference on machine learning 2018
 - [ [PDF](http://proceedings.mlr.press/v80/long18a/long18a.pdf) | [bibtex](https://scholar.googleusercontent.com/scholar.bib?q=info:KW7G5ZqtD6gJ:scholar.google.com/&output=citation&scisdr=CgWA1LDyEJ_Y5qRtd8o:AAGBfm0AAAAAZARrb8q8Bp-YTbVLUxg6k1WnA04yh8tj&scisig=AAGBfm0AAAAAZARrb_9Zm9dEtLa90PZz11V7zasbeq0a&scisf=4&ct=citation&cd=-1&hl=zh-CN) ]
 
+### If you use the code in '/PhyTools/loss-embedding/PDENet2', please cite:
+
 **PDE-Net 2.0: Learning PDEs from data with a numeric-symbolic hybrid deep network** 
 
 - Long Z, Lu Y, Dong B
