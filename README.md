@@ -3,6 +3,14 @@ This project aims to provide convenient Physics embedding tools for researchers 
 
 
 # Reference
+### If you use the code in '/PhyTools/loss-embedding/DeepMod', please cite:
+
+**DeepMoD: Deep learning for model discovery in noisy data** 
+
+- Both, Gert-Jan, et al. 
+- Journal of Computational Physics 2021
+- [ [PDF](https://arxiv.org/pdf/1904.09406.pdf%C2%A0%E2%80%A6) | [bibtex](https://scholar.googleusercontent.com/scholar.bib?q=info:Q4z6DBQoocwJ:scholar.google.com/&output=citation&scisdr=CgWA1L5eELqo8q2xqXs:AAGBfm0AAAAAZA23sXuc2dlrQnsPK3sBk-GuaoUoPYpL&scisig=AAGBfm0AAAAAZA23sZGBCQIHvKDkJzLPBuPc67km2n-p&scisf=4&ct=citation&cd=-1&hl=en) ]
+
 ### If you use the code in '/PhyTools/model-embedding/PDENet', please cite:
 
 **Pde-net: Learning pdes from data** 
