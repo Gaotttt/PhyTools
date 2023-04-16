@@ -44,3 +44,12 @@ This project aims to provide convenient Physics embedding tools for researchers 
 - Li Z, Kovachki N, Azizzadenesheli K, et al
 - ICLR 2020
 - [ [PDF](https://arxiv.org/pdf/2010.08895.pdf?trk=public_post_comment-text) | [bibtex](https://scholar.googleusercontent.com/scholar.bib?q=info:fI2-mHuyzawJ:scholar.google.com/&output=citation&scisdr=CgWA1LfyEJ_Y5qR4HUw:AAGBfm0AAAAAZAR-BUxuYRPwgQgAV4653HiSU5OTguri&scisig=AAGBfm0AAAAAZAR-BdlR-chaKC2ZUiPHI8BmDpvsUtfy&scisf=4&ct=citation&cd=-1&hl=zh-CN) ]
+
+
+### If you use the code in '/PhyTools/model-embedding/AFNO', please cite:
+
+**Efficient Token Mixing for Transformers via Adaptive Fourier Neural Operators** 
+
+- Guibas J, Mardani M, Li Z, et al
+- ICLR 2021
+- [ [PDF](https://openreview.net/pdf?id=EXHG-A3jlM) | [bibtex](https://scholar.googleusercontent.com/scholar.bib?q=info:-pkJFZnHN-0J:scholar.google.com/&output=citation&scisdr=Cpt_I16bEL-itpvcqnA:AJ9-iYsAAAAAZDvasnBkDImWRHJ5-cS70USNPyU&scisig=AJ9-iYsAAAAAZDvasrzzSYDwExb7RE3VrNcHtu0&scisf=4&ct=citation&cd=-1&hl=en) ]
