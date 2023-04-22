@@ -8,7 +8,6 @@ import phytools.pdetools.example.rd2d as rd2d
 import phytools.pdetools.example.cdr2d as cdr2d
 from phytools.models.PDENet2 import polypde, setcallback
 from phytools.datasets import transform
-from configs import PDENet2
 
 __all__ = ['setenv',]
 
@@ -16,10 +15,10 @@ def _set_model(options):
 
     globalnames = {} # variables need to be exported to training&testing script
     for k in options:
-        globalnames[k[2:]] = options[k]
+        globalnames[k] = options[k]
     globalnames['dtype'] = torch.float if globalnames['dtype'] == 'float' else torch.float64
-    bound = options['--eps']*options['--cell_num']
-    s = bound/options['--dx']
+    bound = options['eps']*options['cell_num']
+    s = bound/options['dx']
     if abs(s-round(s))>1e-6:
         warnings.warn('cell_num*eps/dx should be an integer but got'+str(s))
     if not globalnames['constraint'].upper() in ['FROZEN','MOMENT','FREE']:
@@ -27,7 +26,7 @@ def _set_model(options):
         globalnames['constraint'] = int(globalnames['constraint'])
     globalnames['mesh_size'] = [round(s),]*2
     globalnames['mesh_bound'] = [[0,0],[bound,]*2]
-    globalnames['kernel_size'] = [options['--kernel_size'],]*2
+    globalnames['kernel_size'] = [options['kernel_size'],]*2
 
     model = polypde.POLYPDE2D(
             dt=globalnames['dt'],
@@ -67,21 +66,21 @@ def setenv(options):
         sampling,addnoise(callable function): data down sample and add noise to data
     """
     globalnames, callback, model = _set_model(options)
-    if options['--dataname'] == 'None':
+    if options['dataname'] == 'None':
         dataoptions = conf.setoptions(configfile='checkpoint/'+
-                options['--dataname']+'/options.yaml', 
+                options['dataname']+'/options.yaml',
                 isload=True)
-        dataoptions['--start_from'] = 80
-        assert options['--cell_num']%dataoptions['--cell_num'] == 0
-        dataoptions['--device'] = options['--device']
-        dataoptions['--dtype'] = options['--dtype']
+        dataoptions['start_from'] = 80
+        assert options['cell_num']%dataoptions['cell_num'] == 0
+        dataoptions['device'] = options['device']
+        dataoptions['dtype'] = options['dtype']
         _,_,data_model = _set_model(dataoptions)
-        data_model.tiling = options['--cell_num']//dataoptions['--cell_num']
+        data_model.tiling = options['cell_num']//dataoptions['cell_num']
     mesh_size = list(m*globalnames['zoom'] for m in globalnames['mesh_size'])
     mesh_bound = globalnames['mesh_bound']
     viscosity = globalnames['viscosity']
     dx = globalnames['cell_num']*globalnames['eps']/mesh_size[0]
-    if options['--dataname'].upper() == 'BURGERS':
+    if options['dataname'].upper() == 'BURGERS':
         max_dt = globalnames['max_dt']
         data_model = burgers2d.BurgersTime2d(max_dt=max_dt,
                 mesh_size=mesh_size,
@@ -89,7 +88,7 @@ def setenv(options):
                 viscosity=viscosity,
                 timescheme=globalnames['data_timescheme'],
                 )
-    elif options['--dataname'].upper() == 'HEAT':
+    elif options['dataname'].upper() == 'HEAT':
         max_dt = globalnames['max_dt']
         data_model = cde2d.Heat(max_dt=max_dt,
                 mesh_size=mesh_size,
@@ -97,7 +96,7 @@ def setenv(options):
                 timescheme=globalnames['data_timescheme']
                 )
         data_model.coe[0,2] = data_model.coe[2,0] = viscosity
-    elif options['--dataname'].upper() == 'REACTIONDIFFUSION':
+    elif options['dataname'].upper() == 'REACTIONDIFFUSION':
         max_dt = globalnames['max_dt']
         data_model = rd2d.RDTime2d(max_dt=max_dt,
                 mesh_size=mesh_size,
@@ -106,7 +105,7 @@ def setenv(options):
                 beta=1,
                 timescheme=globalnames['data_timescheme']
                 )
-    elif options['--dataname'].upper() == 'CDR':
+    elif options['dataname'].upper() == 'CDR':
         max_dt = globalnames['max_dt']
         data_model = cdr2d.CDRTime2d(max_dt=max_dt,
                 mesh_size=mesh_size,
@@ -123,7 +122,7 @@ def setenv(options):
     sampling = transform.Compose(
             transform.DownSample(mesh_size=globalnames['mesh_size']),
             )
-    addnoise = transform.AddNoise(start_noise=options['--start_noise'], end_noise=options['--end_noise'])
+    addnoise = transform.AddNoise(start_noise=options['start_noise'], end_noise=options['end_noise'])
 
     return globalnames, callback, model, data_model, sampling, addnoise
 
