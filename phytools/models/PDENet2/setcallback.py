@@ -5,10 +5,10 @@ from collections import OrderedDict
 
 class setcallback(object):
     def __init__(self, options, nfi=None, module=None, stage=None):
-        self.name = options['--name']
-        self.recordfile = options['--recordfile'] if options['--recordfile'] != 'None' else None
-        self.recordcycle = options['--recordcycle'] 
-        self.savecycle = options['--savecycle']
+        self.name = options['name']
+        self.recordfile = options['recordfile'] if options['recordfile'] != 'None' else None
+        self.recordcycle = options['recordcycle']
+        self.savecycle = options['savecycle']
         self.savepath = 'checkpoint/'+self.name
         self.startt = time.time()
         self.Fs = []
