@@ -6,7 +6,7 @@ import phytools.pdetools.example.burgers2d as burgers2d
 import phytools.pdetools.example.cde2d as cde2d
 import phytools.pdetools.example.rd2d as rd2d
 import phytools.pdetools.example.cdr2d as cdr2d
-from phytools.models.PDENet2 import polypde, setcallback
+from . import polypde, setcallback
 from phytools.datasets import transform
 
 __all__ = ['setenv',]
@@ -66,16 +66,6 @@ def setenv(options):
         sampling,addnoise(callable function): data down sample and add noise to data
     """
     globalnames, callback, model = _set_model(options)
-    if options['dataname'] == 'None':
-        dataoptions = conf.setoptions(configfile='checkpoint/'+
-                options['dataname']+'/options.yaml',
-                isload=True)
-        dataoptions['start_from'] = 80
-        assert options['cell_num']%dataoptions['cell_num'] == 0
-        dataoptions['device'] = options['device']
-        dataoptions['dtype'] = options['dtype']
-        _,_,data_model = _set_model(dataoptions)
-        data_model.tiling = options['cell_num']//dataoptions['cell_num']
     mesh_size = list(m*globalnames['zoom'] for m in globalnames['mesh_size'])
     mesh_bound = globalnames['mesh_bound']
     viscosity = globalnames['viscosity']

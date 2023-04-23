@@ -1,6 +1,6 @@
 name: 'test'                # case name, string
 dtype: 'double'             # string: 'double', 'float'
-device: 'cpu'               # select device for the models, a string: 'cpu', 'cuda', 'cuda:0', 'cuda:3' etc.
+device: 'cuda'              # select device for the models, a string: 'cpu', 'cuda', 'cuda:0', 'cuda:3' etc.
 constraint: 'frozen'        # constraint type of convolution kernel: 'frozen'(string), 1 (int, 1st order precision), 2 (int, 2nd order precision), etc.
 # computing region          #
 dt: 0.01                    # time step size of the learned models, double
@@ -21,7 +21,7 @@ blocks:
 kernel_size: 5              # convolution kernel size, int
 max_order: 2                # max spatial differential order in the models, int
 dx: 0.1963                  # delta x, double
-hidden_layers: 5            # hidden layers of symnet, int
+hidden_layers: 2            # hidden layers of symnet, int
 scheme: 'upwind'            # string: upwind, central
 # data generator                #
 dataname: 'burgers'         # dataname, string: burgers, heat, cdr
