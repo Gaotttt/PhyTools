@@ -1,9 +1,9 @@
 import torch
 import timeout_decorator
 import numpy as np
-from phytools.optim import NumpyFunctionInterface
 from scipy.optimize import fmin_bfgs as bfgs
-from phytools.models.PDENet2 import setenv,initparameters
+from ...optim import NumpyFunctionInterface
+from . import setenv,initparameters
 
 
 class PDENet2():
