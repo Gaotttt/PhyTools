@@ -1,13 +1,9 @@
 import warnings
 import numpy as np
 import torch
-import phytools.pdetools as pdetools
-import phytools.pdetools.example.burgers2d as burgers2d
-import phytools.pdetools.example.cde2d as cde2d
-import phytools.pdetools.example.rd2d as rd2d
-import phytools.pdetools.example.cdr2d as cdr2d
-from . import polypde, setcallback
-from phytools.datasets import transform
+from ...datasets import transform
+from . import pdetools, polypde, setcallback
+from .pdetools.example import burgers2d, cde2d, rd2d, cdr2d
 
 __all__ = ['setenv',]
 

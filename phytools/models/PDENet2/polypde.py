@@ -2,7 +2,8 @@ import numpy as np
 from numpy import *
 import torch
 from torch.autograd import grad
-from phytools.models.PDENet2 import expr, FD
+from . import expr
+from .nn.modules import FD
 
 __all__ = ['POLYPDE2D',]
 
