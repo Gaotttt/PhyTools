@@ -1,6 +1,7 @@
 import argparse
 from phytools.configs.config import Config
-from phytools.models.PDENet2 import PDENet2
+# from phytools.models.PDENet2.model import PDENet2 as Net
+from phytools.models.ODENet.model import ODENet as Net
 
 
 def parse_args():
@@ -14,7 +15,7 @@ def parse_args():
 def main():
     args = parse_args()
     cfg = Config.fromfile(args.config)
-    model = PDENet2(cfg)
+    model = Net(cfg)
     model.train()
 
 

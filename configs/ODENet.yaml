@@ -1,0 +1,9 @@
+method: 'dopri5'  # type=str, choices=['dopri5', 'adams'], default='dopri5'
+data_size: 1000   # type=int, default=1000
+batch_time: 10    # type=int, default=10
+batch_size: 20    # type=int, default=20
+niters: 2000      # type=int, default=2000
+test_freq: 20     # type=int, default=20
+viz: 'true'       # type=str, choice=['true', 'false'], default='true'
+device: 'cuda:0'  # type=str, choice=['cpu', 'cuda:0', 'cuda:1', etc], default='cuda:0'
+adjoint: 'true'   # type=str, choice=['true', 'false'], default='true'
