@@ -1,0 +1,49 @@
+name: 'test'                # case name, string
+dtype: 'double'             # string: 'double', 'float'
+device: 'cuda'              # select device for the models, a string: 'cpu', 'cuda', 'cuda:0', 'cuda:3' etc.
+constraint: 'frozen'        # constraint type of convolution kernel: 'frozen'(string), 1 (int, 1st order precision), 2 (int, 2nd order precision), etc.
+# computing region          #
+dt: 0.01                    # time step size of the learned models, double
+cell_num: 1                 # compute region: [0,eps*cell_num]**2, int
+eps: 6.2832                 # compute region: [0,eps*cell_num]**2, double
+blocks:
+- 0
+- 1
+- 2
+- 3
+- 4
+- 5
+- 6
+- 9
+- 12
+- 15                        # training blocks: 0 for warmup, a string to be convert to a list of int
+# super parameters of network   #
+kernel_size: 5              # convolution kernel size, int
+max_order: 2                # max spatial differential order in the models, int
+dx: 0.1963                  # delta x, double
+hidden_layers: 2            # hidden layers of symnet, int
+scheme: 'upwind'            # string: upwind, central
+# data generator                #
+dataname: 'burgers'         # dataname, string: burgers, heat, cdr
+viscosity: 0.05             # double
+zoom: 4                     # dx(of data generator) = dx(of learned models)/zoom, double
+max_dt: 0.000625            # max dt of data generator, double
+batch_size: 28              # batch size, int
+data_timescheme: 'rk2'      # time scheme for data generator, string: rk2, euler
+channel_names: 'u,v'        #
+freq: 4                     # initial data frequency, int
+data_start_time: 1.0        #
+# data transform                #
+start_noise: 0.001          # noise of initial value
+end_noise: 0.001            # noise of end time value
+# others                        #
+stablize: 0.0               #
+sparsity: 0.005             # sparsity regularization on parameters of symnet
+momentsparsity: 0.001       # moment sparsity regularization on parameters of moment matrix
+npseed: -1                  # numpy random seed, -1 means no specific random seed
+torchseed: -1               # torch random seed, -1 means no specifig random seed
+maxiter: 2000               # maxiteration of each stage of training
+recordfile: 'converge'      # converge information of each stage will be print into checkpoint/${name}/converge
+recordcycle: 200            # print information each 'recordcycle' steps during training
+savecycle: -1               #
+start_from: -1              #
