@@ -1,0 +1,1 @@
+device: 'cuda:0'  # type=str, choice=['cpu', 'cuda:0', 'cuda:1', etc], default='cuda:0'
