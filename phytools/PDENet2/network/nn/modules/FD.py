@@ -1,7 +1,6 @@
 """Finite Difference tools"""
 import numpy as np
 from numpy import *
-from numpy.linalg import *
 from functools import reduce
 from scipy.special import factorial
 import torch

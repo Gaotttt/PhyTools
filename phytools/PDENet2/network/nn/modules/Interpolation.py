@@ -4,7 +4,7 @@ from numpy import *
 import torch
 import torch.nn as nn
 from ..functional.interpolation import lagrangeinterp,_ele2coe,_fix_inputs,_base
-from ...utils import meshgen
+from phytools.PDENet2.utils import meshgen
 
 __all__ = ['LagrangeInterp', 'LagrangeInterpFixInputs']
 
