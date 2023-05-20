@@ -1,6 +1,6 @@
 import numpy as np
 import torch
-from phytools.models.PDENet2.network.nn import functional as aF
+from ..nn import functional as aF
 
 __all__ = ['UpWind1dRHI', 'UpWind2dRHI', 'UpWind3dRHI']
 

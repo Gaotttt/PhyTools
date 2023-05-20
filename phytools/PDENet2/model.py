@@ -2,9 +2,9 @@ import torch
 import timeout_decorator
 import numpy as np
 from scipy.optimize import fmin_bfgs as bfgs
-from ...optim import NumpyFunctionInterface
 from .network import initparameters, setenv
 from .loss import loss_funtion
+from .loss.optim import NumpyFunctionInterface
 
 
 class PDENet2():

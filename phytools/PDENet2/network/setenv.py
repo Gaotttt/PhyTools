@@ -1,9 +1,9 @@
 import warnings
 import numpy as np
 import torch
-from phytools.models.PDENet2.dataset import transform
-from phytools.models.PDENet2.network import pdetools, polypde, setcallback
-from phytools.models.PDENet2.network.pdetools.example import burgers2d, cde2d, rd2d, cdr2d
+from ..dataset import transform
+from . import pdetools, polypde, setcallback
+from .pdetools.example import burgers2d, cde2d, rd2d, cdr2d
 
 __all__ = ['setenv',]
 

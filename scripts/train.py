@@ -1,8 +1,8 @@
 import argparse
 from phytools.config import Config
-from phytools.models.PDENet2.model import PDENet2 as Net
-# from phytools.models.PDENet.model import PDENet as Net
-# from phytools.models.ODENet.model import ODENet as Net
+from phytools.PDENet2.model import PDENet2 as Net
+# from phytools.PDENet.model import PDENet as Net
+# from phytools.ODENet.model import ODENet as Net
 
 
 def parse_args():
