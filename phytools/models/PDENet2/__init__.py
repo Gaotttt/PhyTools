@@ -1,1 +1,1 @@
-from .PDENet2 import PDENet2
+from .model import PDENet2

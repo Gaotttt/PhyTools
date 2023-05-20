@@ -1,9 +1,8 @@
-import numpy as np
 from numpy import *
 import torch
 from torch.autograd import grad
 from . import expr
-from .nn.modules import FD
+from phytools.models.PDENet2.network.nn.modules import FD
 
 __all__ = ['POLYPDE2D',]
 
@@ -17,7 +16,7 @@ class POLYPDE2D(torch.nn.Module):
         self._constraint = constraint
         for k in range(max_order+1):
             for j in range(k+1):
-                f = FD.FD2d(kernel_size, (j,k-j), dx=self.dx, constraint=constraint, boundary='Periodic')
+                f = FD.FD2d(kernel_size, (j, k - j), dx=self.dx, constraint=constraint, boundary='Periodic')
                 f.double()
                 self.add_module('fd'+str(j)+str(k-j), f)
         # initparameters.initkernels(self)

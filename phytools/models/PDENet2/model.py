@@ -3,7 +3,8 @@ import timeout_decorator
 import numpy as np
 from scipy.optimize import fmin_bfgs as bfgs
 from ...optim import NumpyFunctionInterface
-from . import setenv,initparameters
+from .network import initparameters, setenv
+from .loss import loss_funtion
 
 
 class PDENet2():
@@ -59,7 +60,7 @@ class PDENet2():
             print(initparameters.trainvar(model.UInputs(u_obs[0])))
             # set NumpyFunctionInterface
             def forward():
-                stableloss, dataloss, sparseloss, momentloss = setenv.loss(model, u_obs, cfg, block, layerweight)
+                stableloss, dataloss, sparseloss, momentloss = loss_funtion.loss(model, u_obs, cfg, block, layerweight)
                 if block == 0:
                     # for stage='warmup', no regularization term used
                     stableloss = 0
@@ -82,7 +83,7 @@ class PDENet2():
             callback.nfi = nfi
             def callbackhook(_callback, *args):
                 # global model,block,u0_obs,T,stable_loss,data_loss,sparse_loss
-                stableloss, dataloss, sparseloss, momentloss = setenv.loss(model, u_obs, cfg, block, layerweight)
+                stableloss, dataloss, sparseloss, momentloss = loss_funtion.loss(model, u_obs, cfg, block, layerweight)
                 stableloss, dataloss, sparseloss, momentloss = \
                     stableloss.item(), dataloss.item(), sparseloss.item(), momentloss.item()
                 with _callback.open() as output:

@@ -1,9 +1,9 @@
 import warnings
 import numpy as np
 import torch
-from ...datasets import transform
-from . import pdetools, polypde, setcallback
-from .pdetools.example import burgers2d, cde2d, rd2d, cdr2d
+from phytools.models.PDENet2.dataset import transform
+from phytools.models.PDENet2.network import pdetools, polypde, setcallback
+from phytools.models.PDENet2.network.pdetools.example import burgers2d, cde2d, rd2d, cdr2d
 
 __all__ = ['setenv',]
 
@@ -153,46 +153,3 @@ def data(model, data_model, globalnames, sampling, addnoise, block, data_start_t
             _, ut_obs = addnoise(u0_true, ut_true)
             u_obs.append(ut_obs)
     return u_obs,u_true,u
-
-def _sparse_loss(model):
-    """
-    SymNet regularization
-    """
-    loss = 0
-    s = 1e-3
-    for p in model.expr_params():
-        p = p.abs()
-        loss = loss+((p<s).to(p)*0.5/s*p**2).sum()+((p>=s).to(p)*(p-s/2)).sum()
-    return loss
-def _moment_loss(model):
-    """
-    Moment regularization
-    """
-    loss = 0
-    s = 1e-2
-    for p in model.diff_params():
-        p = p.abs()
-        loss = loss+((p<s).to(p)*0.5/s*p**2).sum()+((p>=s).to(p)*(p-s/2)).sum()
-    return loss
-def loss(model, u_obs, globalnames, block, layerweight=None):
-    if layerweight is None:
-        layerweight = [0,]*stepnum
-        layerweight[-1] = 1
-    dt = globalnames['dt']
-    stableloss = 0
-    dataloss = 0
-    sparseloss = _sparse_loss(model)
-    momentloss = _moment_loss(model)
-    stepnum = block if block>=1 else 1
-    ut = u_obs[0]
-    for steps in range(1,stepnum+1):
-        uttmp = model(ut, T=dt)
-        upad = model.fd00.pad(ut)
-        stableloss = stableloss+(model.relu(uttmp-model.maxpool(upad))**2+
-                model.relu(-uttmp-model.maxpool(-upad))**2).sum()
-        dataloss = dataloss+\
-                layerweight[steps-1]*torch.mean(((uttmp-u_obs[steps])/dt)**2)
-                # layerweight[steps-1]*torch.mean(((uttmp-u_obs[steps])/(steps*dt))**2)
-        ut = uttmp
-    return stableloss, dataloss, sparseloss, momentloss
-
