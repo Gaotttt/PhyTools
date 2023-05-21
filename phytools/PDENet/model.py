@@ -1,14 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-@Time ： 2023/2/19 18:17
-@Auth ： Yajun Gao
-@File ：7_frozen_filter.py
-@IDE ：PyCharm
-"""
-
 import torch
 import torch.nn as nn
-from constrain_moments import K2M
+from utils.utils import K2M
 
 # Create PDENet Block
 class PhyCell(nn.Module):
