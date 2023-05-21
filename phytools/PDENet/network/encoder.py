@@ -134,10 +134,10 @@ class ConvLSTM(nn.Module):
         
         
 class encoder(nn.Module):
-    def __init__(self, PhyCell, ConvLSTM, device):
+    def __init__(self, PhyCell):
         super(encoder, self).__init__()
-        self.PhyCell = PhyCell.to(device)
-        self.ConvLSTM = ConvLSTM.to(device)
+        self.PhyCell = PhyCell
+        self.ConvLSTM = ConvLSTM()
         self.decoder = nn.Sequential(
                 nn.Conv2d(in_channels=nin, out_channels=nout, kernel_size=(3,3), stride=stride, padding=1),
                 nn.GroupNorm(16,nout),
