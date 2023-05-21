@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 from utils.utils import K2M
+from dataset.moving_mnist import MovingMNIST
 
 # Create PDENet Block
 class PhyCell(nn.Module):
@@ -42,23 +43,67 @@ class PDENet():
   def __init__(self, cfg):
       self.cfg = cfg
       self.device = torch.device(self.cfg["device"])
-  
+    
   def train(self):
+      mm = MovingMNIST(root=self.cfg["root"], is_train=True, n_frames_input=10, n_frames_output=10, num_objects=[2])
+      train_loader = torch.utils.data.DataLoader(dataset=mm, batch_size=self.cfg["batch_size"], shuffle=True, num_workers=0)
       PhyModel = PhyCell().to(self.device)
+        
       # Moment regularization
-      constraints = torch.zeros((49,7,7))
+      constraints = torch.zeros((49,7,7)).to(self.device)
       ind = 0
       for i in range(0,7):
           for j in range(0,7):
               constraints[ind,i,j] = 1
               ind +=1
+            
+      train_losses = []
+      encoder_optimizer = torch.optim.Adam(PhyModel.parameters(),lr=0.001)
+      scheduler = ReduceLROnPlateau(optimizer, mode='min', patience=2,factor=0.1,verbose=True)
+      criterion = nn.MSELoss()
+    
+      for epoch in range(0, self.cfg["epoch"]):
+          t0 = time.time()
+          loss_epoch = 0
+          teacher_forcing_ratio = np.maximum(0 , 1 - epoch * 0.003)
+          for i, out in enumerate(train_loader, 0):
+              input_tensor = out[1].to(device)
+              target_tensor = out[2].to(device)
+              input_length  = input_tensor.size(1)
+              target_length = target_tensor.size(1)
+              encoder_optimizer.zero_grad()
+              loss = 0
+              for ei in range(input_length-1): 
+                  encoder_output, encoder_hidden, output_image,_,_ = encoder(input_tensor[:,ei,:,:,:], (ei==0) )
+                  loss += criterion(output_image,input_tensor[:,ei+1,:,:,:])
 
-      phy_loss = 0.0
-
-      k2m = K2M([7, 7])
-      for b in range(0, PhyModel.input_dim):
-          filters = PhyModel.F.conv1.weight[:, b, :, :] # (nb_filters,7,7)
-          m = k2m(filters.double())
-          m = m.float()
-          # constrains is a precomputed matrix
-          phy_loss += nn.MSELoss(m, constraints)
+              decoder_input = input_tensor[:,-1,:,:,:] # first decoder input = last image of input sequence
+              use_teacher_forcing = True if random.random() < teacher_forcing_ratio else False 
+              for di in range(target_length):
+                  decoder_output, decoder_hidden, output_image,_,_ = encoder(decoder_input)
+                  target = target_tensor[:,di,:,:,:]
+                  loss += criterion(output_image,target)
+                  if use_teacher_forcing:
+                      decoder_input = target # Teacher forcing    
+                  else:
+                      decoder_input = output_image
+             
+              k2m = K2M([7, 7])
+              for b in range(0, PhyModel.input_dim):
+                  filters = PhyModel.F.conv1.weight[:, b, :, :] # (nb_filters,7,7)
+                  m = k2m(filters.double())
+                  m = m.float()
+                  # constrains is a precomputed matrix
+                  loss += criterion(m, constraints)
+              loss.backward()
+              encoder_optimizer.step()
+              loss_epoch += (loss.item() / target_length)
+          train_losses.append(loss_epoch) 
+          if (epoch+1) % print_every == 0:
+              print('epoch ',epoch,  ' loss ',loss_epoch, ' time epoch ',time.time()-t0)
+            
+          if (epoch+1) % eval_every == 0:
+              mse, mae,ssim = evaluate(encoder,test_loader) 
+              scheduler.step(mse)                   
+              torch.save(encoder.state_dict(),'save/encoder_{}.pth'.format(name))                           
+      return train_losses
