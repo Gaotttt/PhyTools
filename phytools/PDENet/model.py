@@ -48,7 +48,7 @@ class PDENet():
       mm = MovingMNIST(root=self.cfg["root"], is_train=True, n_frames_input=10, n_frames_output=10, num_objects=[2])
       train_loader = torch.utils.data.DataLoader(dataset=mm, batch_size=self.cfg["batch_size"], shuffle=True, num_workers=0)
       PhyModel = PhyCell().to(self.device)
-        
+      encoder = encoder().to(self.device)
       # Moment regularization
       constraints = torch.zeros((49,7,7)).to(self.device)
       ind = 0
@@ -109,8 +109,8 @@ class PDENet():
       return train_losses
 
   def evaluate(encoder):
-      mm = MovingMNIST(root=args.root, is_train=False, n_frames_input=10, n_frames_output=10, num_objects=[2])
-      test_loader = torch.utils.data.DataLoader(dataset=mm, batch_size=args.batch_size, shuffle=False, num_workers=0)
+      mm = MovingMNIST(root=self.cfg["root"], is_train=False, n_frames_input=10, n_frames_output=10, num_objects=[2])
+      test_loader = torch.utils.data.DataLoader(dataset=mm, batch_size=self.cfg["batch_size"], shuffle=False, num_workers=0)
       total_mse, total_mae,total_ssim,total_bce = 0,0,0,0
       t0 = time.time()
       with torch.no_grad():
