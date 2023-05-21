@@ -103,7 +103,52 @@ class PDENet():
               print('epoch ',epoch,  ' loss ',loss_epoch, ' time epoch ',time.time()-t0)
             
           if (epoch+1) % eval_every == 0:
-              mse, mae,ssim = evaluate(encoder,test_loader) 
+              mse, mae,ssim = evaluate(encoder) 
               scheduler.step(mse)                   
               torch.save(encoder.state_dict(),'save/encoder_{}.pth'.format(name))                           
       return train_losses
+
+  def evaluate(encoder):
+      mm = MovingMNIST(root=args.root, is_train=False, n_frames_input=10, n_frames_output=10, num_objects=[2])
+      test_loader = torch.utils.data.DataLoader(dataset=mm, batch_size=args.batch_size, shuffle=False, num_workers=0)
+      total_mse, total_mae,total_ssim,total_bce = 0,0,0,0
+      t0 = time.time()
+      with torch.no_grad():
+          for i, out in enumerate(test_loader, 0):
+              input_tensor = out[1].to(device)
+              target_tensor = out[2].to(device)
+              input_length = input_tensor.size()[1]
+              target_length = target_tensor.size()[1]
+                
+              for ei in range(input_length-1):
+                  encoder_output, encoder_hidden, _,_,_  = encoder(input_tensor[:,ei,:,:,:], (ei==0))
+              
+              decoder_input = input_tensor[:,-1,:,:,:] # first decoder input= last image of input sequence
+              predictions = []
+              
+              for di in range(target_length):
+                  decoder_output, decoder_hidden, output_image,_,_ = encoder(decoder_input, False, False)
+                  decoder_input = output_image
+                  predictions.append(output_image.cpu())
+                    
+              input = input_tensor.cpu().numpy()
+              target = target_tensor.cpu().numpy()
+              predictions =  np.stack(predictions) # (10, batch_size, 1, 64, 64)
+              predictions = predictions.swapaxes(0,1)  # (batch_size,10, 1, 64, 64)
+
+              mse_batch = np.mean((predictions-target)**2 , axis=(0,1,2)).sum()
+              mae_batch = np.mean(np.abs(predictions-target) ,  axis=(0,1,2)).sum() 
+              total_mse += mse_batch
+              total_mae += mae_batch
+            
+              for a in range(0,target.shape[0]):
+                  for b in range(0,target.shape[1]):
+                      total_ssim += ssim(target[a,b,0,], predictions[a,b,0,]) / (target.shape[0]*target.shape[1]) 
+      
+              cross_entropy = -target*np.log(predictions) - (1-target) * np.log(1-predictions)
+              cross_entropy = cross_entropy.sum()
+              cross_entropy = cross_entropy / (args.batch_size*target_length)
+              total_bce +=  cross_entropy
+        
+      print('eval mse ', total_mse/len(test_loader),  ' eval mae ', total_mae/len(test_loader),' eval ssim ',total_ssim/len(test_loader), ' time= ', time.time()-t0)        
+      return total_mse/len(test_loader),  total_mae/len(test_loader), total_ssim/len(test_loader)
