@@ -20,7 +20,7 @@ class PDENet():
       mm = MovingMNIST(root=self.cfg["root"], is_train=True, n_frames_input=10, n_frames_output=10, num_objects=[2])
       train_loader = torch.utils.data.DataLoader(dataset=mm, batch_size=self.cfg["batch_size"], shuffle=True, num_workers=0)
       PhyModel = PhyCell().to(self.device)
-      encoder = encoder().to(self.device)
+      encoder = encoder(PhyModel).to(self.device)
       # Moment regularization
       constraints = torch.zeros((49,7,7)).to(self.device)
       ind = 0
