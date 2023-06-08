@@ -1,5 +1,4 @@
 import os
-import argparse
 import time
 import numpy as np
 
@@ -59,7 +58,7 @@ class RunningAverageMeter(object):
         self.val = val
 
 
-class ODENet():
+class ODENet(object):
 
     def __init__(self, cfg):
         self.cfg = cfg

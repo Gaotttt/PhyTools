@@ -1,9 +1,32 @@
+#method: 'dopri5'  # type=str, choices=['dopri5', 'adams'], default='dopri5'
+#data_size: 1000   # type=int, default=1000
+#batch_time: 10    # type=int, default=10
+#batch_size: 20    # type=int, default=20
+#niters: 2000      # type=int, default=2000
+#test_freq: 20     # type=int, default=20
+#viz: 'true'       # type=str, choice=['true', 'false'], default='true'
+#device: 'cuda:0'  # type=str, choice=['cpu', 'cuda:0', 'cuda:1', etc], default='cuda:0'
+#adjoint: 'true'   # type=str, choice=['true', 'false'], default='true'
+
+
+
+device: 'cuda:0'  # type=str, choice=['cpu', 'cuda:0', 'cuda:1', etc], default='cuda:0'
+dataset: 'mnist'  # type=str, choice=['default', 'mnist'], default='default'
 method: 'dopri5'  # type=str, choices=['dopri5', 'adams'], default='dopri5'
+adjoint: 'true'   # type=str, choice=['true', 'false'], default='true'
 data_size: 1000   # type=int, default=1000
 batch_time: 10    # type=int, default=10
-batch_size: 20    # type=int, default=20
+batch_size: 128   # type=int, default=20
 niters: 2000      # type=int, default=2000
+nepochs: 160      #type=int, default=160
+lr: 0.1           #type=float, default=0.1
 test_freq: 20     # type=int, default=20
+test_batch_size: 1000 #type=int, default=1000)
 viz: 'true'       # type=str, choice=['true', 'false'], default='true'
-device: 'cuda:0'  # type=str, choice=['cpu', 'cuda:0', 'cuda:1', etc], default='cuda:0'
-adjoint: 'true'   # type=str, choice=['true', 'false'], default='true'
+save: 'phytools/ODENet/result' #type=str, default='./experiment1')
+
+# mnist dataset
+network: 'odenet' #type=str, choices=['resnet', 'odenet'], default='odenet'
+tol: 0.001        #type=float, default=1e-3
+downsampling_method: 'conv' #type=str, default='conv', choices=['conv', 'res']
+data_aug: 'true'  #type=str, default='true', choices=['true', 'false']
