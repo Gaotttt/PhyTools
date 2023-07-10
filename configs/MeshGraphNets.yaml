@@ -1,0 +1,8 @@
+mode: 'train' #['train', 'eval']
+model: 'cloth' #['cfd', 'cloth']
+checkpoint_dir: 'chk'
+dataset_dir: '/home/chujiexu/Documents/dataset/meshgraphnet/flag_simple'
+rollout_path: None
+rollout_split: 'valid' #['train', 'test', 'valid'],
+num_rollouts: 10
+num_training_steps: 1000000
