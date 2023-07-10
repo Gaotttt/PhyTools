@@ -4,7 +4,8 @@ from phytools.config import Config
 # from phytools.PDENet.model import PDENet as Net
 # from phytools.ODENet.model import ODENet as Net
 # from phytools.ODENet.model_mnist import ODENet as Net
-from phytools.DeepMoD.model import DeepMoD as Net
+# from phytools.DeepMoD.model import DeepMoD as Net
+from phytools.MeshGraphNets.model import MeshGraphNets as Net
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train a Network')
