@@ -8,7 +8,7 @@ import torch
 from deepymod import DeepMoD as deepmod
 from deepymod.data import Dataset, get_train_test_loader
 from deepymod.data.samples import Subsample_random
-from deepymod.data.burgers import burgers_delta
+from dataset.burgers import burgers_delta
 from deepymod.model.constraint import LeastSquares
 from deepymod.model.func_approx import NN
 from deepymod.model.library import Library1D
