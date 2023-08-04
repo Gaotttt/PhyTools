@@ -9,7 +9,7 @@ from deepymod import DeepMoD as deepmod
 from deepymod.data import Dataset, get_train_test_loader
 from deepymod.data.samples import Subsample_random
 from dataset.burgers import burgers_delta
-from deepymod.model.constraint import LeastSquares
+from loss.constraint import LeastSquares
 from deepymod.model.func_approx import NN
 from deepymod.model.library import Library1D
 from deepymod.model.sparse_estimators import Threshold
